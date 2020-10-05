@@ -1,116 +1,148 @@
 <!DOCTYPE html>
-<html lang=en>
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+	<meta charset="utf-8">
+	<title>Каталог</title>
+	<link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
 </head>
-
 <body>
-    <div class="container">
-        <div class="contact-header padding-site">
-            <div class="header clearfix">
-                <a href="index.html"><img src="img/logo.svg" alt="logo" class="logo"></a>
-                <ul class="menu">
-                    <li class="menu-list"><a href="index.html" class="menu-link">HOME</a></li>
-                    <li class="menu-list"><a href="#" class="menu-link menu-link-active">PRODUCTS</a></li>
-                    <li class="menu-list"><a href="#" class="menu-link">HISTORY</a></li>
-                    <li class="menu-list"><a href="#" class="menu-link">SHOWROOM</a></li>
-                    <li class="menu-list "><a href="contact.html" class="menu-link">CONTACT</a></li>
-                    <li class="menu-list"><a href="#" class="menu-link"><img src="img/search.svg" alt="Поиск"></a></li>
-                </ul>
+	<div class="container">
+		<div class="hero-white">
+			<div class="header clearfix">
+				<a href="index.html" class="logo"></a>
+				<ul class="menu">
+					<li><a href="index.html">домой</a></li>
+					<li><a href="products.html" class="active">продукты</a></li>
+					<li><a href="contact.html">контакты</a></li>
+
+				</ul>
+				<a href="#" class="search"></a>
+                <a href="#" class="basket"></a>
+			</div>
+		</div>
+
+		<div class="details">
+			<div class="links clearfix">
+				<ul class="links-menu">
+					<li><a href="#" class="active">все</a></li>
+					<li><a href="#">дом</a></li>
+					<li><a href="#">офис</a></li>
+					<li><a href="#">модерн</a></li>
+					<li><a href="#">классика</a></li>
+				</ul>
+			</div>
+
+			<div class="details-products">
+				<div class="details-slider">
+					<div class="slider-product">
+						<img src="img/slider1.jpg">
+					</div>
+					<div class="slider-control">
+						<div class="block">
+							<a href="#"><img src="img/controll.jpg" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="img/controll1.jpg" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="img/controll2.jpg" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="description">
+					<h3 class="big-bold">Отличный стул</h3>
+					<h3 class="red">горячее предложение</h3>
+					<p class="price"> 2585.9 <span>руб</span></p>
+					<a href="#" class="red-button">
+						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</a>
+					<div class="description-text">
+						<p>Расположитесь комфортно.</p> 
+						<p>Отличное качество материалов
+						позволит вам это.</p> 
+						<p>Различные цвета</p>
+						<p>высочайший уровень
+						эргономики и прочность.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="related">
+				<div class="title clearfix">
+					<h2>Похожие продукты</h2>
+					<a class="explore" href="#">показать все <img src="img/arrow.png" alt=""></a>
+				</div>
+				<div class="related-products clearfix">
+					<div class="block">
+						<a href="#"><img src="img/product-11.jpg" alt="">
+							<div class="text">
+								<img src="img/icon-hover.png" alt="img">
+								<h4>Стул повышенного качества</h4>
+								<p>Не оторваться. </p>
+							</div>
+						</a>
+					</div>
+					<div class="block">
+						<a href="#"><img src="img/product-21.jpg" alt="">
+							<div class="text">
+								<img src="img/icon-hover.png" alt="img">
+								<h4>Стул повышенного качества</h4>
+								<p>Не оторваться. </p>
+							</div>
+						</a>
+					</div>
+					<div class="block">
+						<a href="#"><img src="img/product-31.jpg" alt="">
+							<div class="text">
+								<img src="img/icon-hover.png" alt="img">
+								<h4>Стул повышенного качества</h4>
+								<p>Не оторваться. </p>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="clr"></div>
+
+	</div>	
+
+	<div class="footer">
+        <div class="clearfix">
+            <div class="text-footer">
+                <h3>контакты</h3>
             </div>
-            <p class="products-title">Our Products Range</p>
+            <div class="text-footer">
+                <h3>полезная информация</h3>
+            </div>
+            <div class="text-footer clearfix">
+                <h3>Оставайтесь на связи</h3>
+                <p>Подписаться на новости и рассылки</p>
+                <form>
+                    <input type="email" name="email" placeholder="ваш email">
+                    <a href="#"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></a>
+                </form>
+            </div>
         </div>
-        <div class="products-mid">
-            <ul class="product-menu">
-                <li class="menu-list"><a href="" class="pr-menu-link pr-menu-border pr-menu-border-act">All</a></li>
-                <li class="menu-list"><a href="" class="pr-menu-link pr-menu-border">HOME</a></li>
-                <li class="menu-list"><a href="" class="pr-menu-link pr-menu-border">OFFICE</a></li>
-                <li class="menu-list"><a href="" class="pr-menu-link">FURNITURE</a></li>
-                <li class="menu-list"><a href="" class="pr-menu-link">MODERN</a></li>
-                <li class="menu-list"><a href="" class="pr-menu-link">CLASSIC</a></li>
-            </ul>
-            <div class="products-foto">
-                <div class="main3-block"><a href="products-detail.html"><img src="img/product-11.jpg" alt=""></a></div>
-                <div class="main3-block"><img src="img/product-21.jpg" alt=""></div>
-                <div class="main3-block-r"><img src="img/product-31.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-41.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-5.jpg" alt=""></div>
-                <div class="main3-block-r"><img src="img/product-6.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-11.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-21.jpg" alt=""></div>
-                <div class="main3-block-r"><img src="img/product-31.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-41.jpg" alt=""></div>
-                <div class="main3-block"><img src="img/product-5.jpg" alt=""></div>
-                <div class="main3-block-r"><img src="img/product-6.jpg" alt=""></div>
-            </div>
-            <a href="#"><img src="img/str.png" class="prod-reload" alt="обновить"></a>
-
+        <p class="small">&copy; GB 2017</p>
+        <div class="social">
+            <a href="#" class="social1"></a>
+            <a href="#" class="social2"></a>
+            <a href="#" class="social3"></a>
+            <a href="#" class="social4"></a>
         </div>
-        <div class="main2">
-            <div class="main2-block1">
-                <div class="main2-text">
-                    <p class="main2-exc">exclusive</p>
-                    <h2>Fishnet Chair</h2>
-                    <p class="main2-content">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
-                    <a href="#" class="button">Order Us</a>
-                </div>
-            </div>
+        <p class="small">Положения &amp; Условия  /  Конфиденциальность &amp; Cookies</p>
+    </div>	
 
-            <div class="main2-block2">
-                <div class="main2-text">
-                    <p class="main2-exc">exclusive</p>
-                    <h2>Fishnet Chair</h2>
-                    <p class="main2-content">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
-                    <a href="#" class="button">Order Us</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-text1">
-                <h2>Contact Us</h2>
-                <p class="footer-p1">132A Bridge Road Richmond VIC <br> Australia. <br> <br>Talk to us on 1300 132 <br>info@interior.com</p>
-            </div>
-
-            <div class="footer-text2">
-                <h2>Useful Information</h2>
-                <p class="footer-p2">
-                    Sales terms<br>
-                    Customer care<br>
-                    Delivery<br>
-                </p>
-            </div>
-            <div class="footer-text3">
-                <p class="footer-p2">
-                    Architect accounts<br>
-                    Careers<br>
-                    Exchanges & returns<br>
-                </p>
-            </div>
-            <div class="footer-text4">
-                <h2>Let’s Stay in Touch!</h2>
-                <p class="footer-p1">
-                    Suscribe to know about our latest news, products and special offers just for suscribers.
-                </p>
-                <input type="text" placeholder="   your email address" id="email">
-                <a href="#" class="aerobutton"><img src="img/aero.png" alt=""></a>
-            </div>
-            <div class="footer-footer">
-                <div class="ffblock1">
-                    <h3 class="ffh3">&copy;&nbsp;Copyright&nbsp;&mdash; INTERIOR 2016. All Rights Reserved.</h3>
-                </div>
-
-                <div class="ffblock2"><img src="img/social-links.png" alt=""></div>
-                <div class="ffblock3">
-                    <h3 class="ffh3">Terms &amp;&nbsp;Conditions&nbsp;/ Privacy policy &amp;&nbsp;Cookies</h3>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
-
 </html>
