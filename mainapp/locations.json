@@ -1,0 +1,19 @@
+[{
+        "city": "Москва",
+        "phone": "+7-888-888-8888",
+        "email": "info@geekshop.ru",
+        "address": "Метро Чертаново, спросить любого"
+    },
+    {
+        "city": "Екатеринбург",
+        "phone": "+7-777-777-7777",
+        "email": "info_yekaterinburg@geekshop.ru",
+        "address": "Рядом с плотинкой"
+    },
+    {
+        "city": "Нижний Тагил",
+        "phone": "+7-999-999-9999",
+        "email": "lower_tagil@geekshop.ru",
+        "address": "Близко к заводу"
+    }
+]
