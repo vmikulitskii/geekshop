@@ -9,7 +9,7 @@
 	</div>
 </div>
 {% endblock %}
-		
+
 {% block content %}
 <div class="details">
 	<div class="links clearfix">
@@ -48,12 +48,12 @@
 				заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
 			</a>
 			<div class="description-text">
-				<p>Расположитесь комфортно.</p> 
+				<p>Расположитесь комфортно.</p>
 				<p>Отличное качество материалов
-				позволит вам это.</p> 
+					позволит вам это.</p>
 				<p>Различные цвета</p>
 				<p>высочайший уровень
-				эргономики и прочность.</p>
+					эргономики и прочность.</p>
 			</div>
 		</div>
 	</div>
@@ -64,13 +64,15 @@
 			<a class="explore" href="#">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
 		</div>
 		<div class="related-products clearfix">
-			{% for same_product in same_products %}
+			{% for product in same_products %}
 			<div class="block">
-				<a href="#"><img src="{% static 'img/' %}{{ same_product.image_src }}" alt="{{ same_product.alt }}">
+				<a href="#"><img src="{{ media_url }}{{ product.image }}" alt="{{ product.short_desc }}">
 					<div class="text">
-						<img src="{% static 'img/icon-hover.png' %}" alt=""{{ same_product.alt }}"">
-						<h4>{{ same_product.name }}</h4>
-						<p>"{{ same_product.desc }}"</p>
+						<img src="{% static 'img/icon-hover.png' %}" alt="img">
+						<h4>Название: {{ product.name }}</h4>
+						<p>Описание: {{ product.description }} </p>
+						<p>Цена: {{ product.price }} </p>
+						<p>На складе: {{ product.quantity }} </p>
 
 					</div>
 				</a>
@@ -83,5 +85,3 @@
 
 <div class="clr"></div>
 {% endblock %}
-
-		
