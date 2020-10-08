@@ -18,7 +18,7 @@ def main(request):
     return render(request, "mainapp/index.html", content)
 
 
-def products(request):
+def products(request, pk=None):
     title = 'товары'
     # with open('mainapp/links_menu.json', 'r') as f:
     #     links_menu = json.load(f)
@@ -30,6 +30,9 @@ def products(request):
 
     content = {"title": title, 'links_menu': links_menu,
                "same_products": same_products,"media_url": settings.MEDIA_URL,}
+    
+    if pk:
+        print(f"User select category: {pk}")
     return render(request, "mainapp/products.html", content)
 
 
