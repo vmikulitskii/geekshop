@@ -1,0 +1,22 @@
+[{
+        "name": "Теплый ламповый стул",
+        "desc": "Расположитесь комфортно.",
+        "image_src": "product-1.jpg",
+        "image_href": "/product/1/",
+        "alt": "продукт 1"
+    },
+    {
+        "name": "Кресло для любителей картошки фри",
+        "desc": "Вы точно в нем поместитесь.",
+        "image_src": "product-3-sm.jpg",
+        "image_href": "/product/3/",
+        "alt": "продукт 3"
+    },
+    {
+        "name": "Стул для близнецов",
+        "desc": "Уже не стул, еще не кресло.",
+        "image_src": "product-2.jpg",
+        "image_href": "/product/2/",
+        "alt": "продукт 2"
+    }
+]
