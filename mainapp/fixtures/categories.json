@@ -1,0 +1,42 @@
+[{
+        "model": "mainapp.productcategory",
+        "pk": 1,
+        "fields": {
+            "name": "Для дома",
+            "description": "отличная мебель для домашнего интерьера."
+        }
+    },
+    {
+        "model": "mainapp.productcategory",
+        "pk": 2,
+        "fields": {
+            "name": "Для офиса",
+            "description": "стильная и надежная офисная мебель нового поколения."
+        }
+    },
+    {
+        "model": "mainapp.productcategory",
+        "pk": 3,
+        "fields": {
+            "name": "Модерн",
+            "description": "мебель в стиле МОДЕРН подойдет для любого интерьера."
+        }
+    },
+    {
+        "model": "mainapp.productcategory",
+        "pk": 4,
+        "fields": {
+            "name": "Классика",
+            "description": "классический стиль актуален в любые времена."
+        }
+    },
+
+    {
+        "model": "mainapp.productcategory",
+        "pk": 5,
+        "fields": {
+            "name": "Странная мебель",
+            "description": "Очень странная мебель не похожая на мебель."
+        }
+    }
+]
