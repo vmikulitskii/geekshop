@@ -3,7 +3,7 @@ from django.shortcuts import render
 from datetime import datetime
 from django.utils import timezone
 import json
-from .models import Product, ProductCategory
+from .models import Contact, Product, ProductCategory
 
 
 def main(request):
@@ -40,6 +40,5 @@ def contact(request):
     title = "о нас"
     visit_date = timezone.now()
     locations = Contact.objects.all()
-    content = {"title": title, "visit_date": visit_date,
-               "locations": locations}
+    content = {"title": title, "visit_date": visit_date, "locations": locations}
     return render(request, "mainapp/contact.html", content)
