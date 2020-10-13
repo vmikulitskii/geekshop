@@ -1,0 +1,21 @@
+[
+    {
+        "model": "authnapp.shopuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$150000$Poyfal2RNsKa$AAnI/z9WprCunEwku4YKvIU9lJAVNsQ//rH2K9Qy2YY=",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "Vladimir",
+            "last_name": "Mikulitskii",
+            "email": "mikulex@mail.ru",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2020-10-11T10:30:10.234Z",
+            "avatar": "",
+            "age": 35,
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]
