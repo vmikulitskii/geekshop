@@ -1,0 +1,32 @@
+[
+    {
+        "model": "mainapp.contact",
+        "pk": 1,
+        "fields": {
+            "phone": "+7-888-888-8888",
+            "email": "info@geekshop.ru",
+            "city": "Москва",
+            "address": "Метро Чертаново, спросить любого"
+        }
+    },
+    {
+        "model": "mainapp.contact",
+        "pk": 2,
+        "fields": {
+            "phone": "+7-777-777-7777",
+            "email": "info_yekaterinburg@geekshop.ru",
+            "city": "Екатеринбург",
+            "address": "Рядом с плотинкой"
+        }
+    },
+    {
+        "model": "mainapp.contact",
+        "pk": 3,
+        "fields": {
+            "phone": "+7-999-999-9999",
+            "email": "lower_tagil@geekshop.ru",
+            "city": "Нижний Тагил",
+            "address": "Близко к заводу"
+        }
+    }
+]
