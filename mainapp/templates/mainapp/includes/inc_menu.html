@@ -6,6 +6,13 @@
             class="{% if request.resolver_match.namespace == 'products' %}active{% endif %}">продукты</a></li>
     <li><a href="{% url 'contact' %}"
             class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
+    
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'auth:edit' %}">
+            {{ user.first_name|default:'Пользователь' }}
+        </a>
+    </li>
     <li>
         {% if user.is_authenticated %}
         <a href="{% url 'auth:logout' %}">выйти</a>
@@ -13,29 +20,25 @@
         <a href="{% url 'auth:login' %}">войти</a>
         {% endif %}
     </li>
-    {% if user.is_authenticated %}
-    <li>
-        <a href="{% url 'auth:edit' %}">
-            {{ user.first_name|default:'Пользователь' }}
-        </a>
-    </li>
     {% endif %}
+    
 </ul>
 <a href="#" class="search"></a>
 <a href="{% url 'basket:view' %}" class="basket">
     <span>
 
         {% if basket %}
-        {{ total_quantity }}
+        Товаров - {{ total_quantity }}
         {% endif %}
 
     </span>
     <span>
 
         {% if basket %}
-        {{ total_price }}р.
+        на сумму <br>
+        {{ total_price }} руб.
         {% endif %}
 
     </span>
-    
+
 </a>

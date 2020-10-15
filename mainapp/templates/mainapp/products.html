@@ -66,15 +66,20 @@
 		<div class="related-products clearfix">
 			{% for product in same_products %}
 			<div class="block">
-				<a href="#"><img src="{{ media_url }}{{ product.image }}" alt="{{ product.short_desc }}">
-					<div class="text">
-						<img src="{% static 'img/icon-hover.png' %}" alt="img">
-						<h4>Название: {{ product.name }}</h4>
-						<p>Описание: {{ product.description }} </p>
-						<p>Цена: {{ product.price }} </p>
-						<p>На складе: {{ product.quantity }} </p>
+				{% if user.is_authenticated %}
+                	<a href="{% url 'basket:add' product.pk %}">
+                {% else %}
+                    <a href="{% url 'auth:login' %}">
+				{% endif %}
+						<img src="{{ media_url }}{{ product.image }}" alt="{{ product.short_desc }}">
+						<div class="text">
+							<img src="{% static 'img/icon-hover.png' %}" alt="img">
+							<h4>Название: {{ product.name }}</h4>
+							<p>Описание: {{ product.description }} </p>
+							<p>Цена: {{ product.price }} </p>
+							<p>На складе: {{ product.quantity }} </p>
 
-					</div>
+						</div>
 				</a>
 			</div>
 			{% endfor %}
