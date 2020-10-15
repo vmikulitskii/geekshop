@@ -26,8 +26,16 @@
     <span>
 
         {% if basket %}
-        {{ basket|length }}
+        {{ total_quantity }}
         {% endif %}
 
     </span>
+    <span>
+
+        {% if basket %}
+        {{ total_price }}р.
+        {% endif %}
+
+    </span>
+    
 </a>

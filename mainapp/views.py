@@ -29,6 +29,8 @@ def products(request, pk=None):
     basket = []
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
+        total_quantity = Basket.total_quantity(basket)
+        total_price = Basket.total_price(basket)
 
     if pk is not None:
         if pk == 0:
@@ -44,7 +46,10 @@ def products(request, pk=None):
             "category": category,
             "products": products,
             "media_url": settings.MEDIA_URL,
-            "basket": basket
+            "basket": basket,
+            "total_quantity":total_quantity,
+            "total_price":total_price,
+
         }
         return render(request, "mainapp/products_list.html", content)
 
