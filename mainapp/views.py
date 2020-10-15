@@ -31,7 +31,8 @@ def products(request, pk=None):
             category = {'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
+            products = Product.objects.filter(
+                category__pk=pk).order_by('price')
         content = {
             "title": title,
             "links_menu": links_menu,
@@ -39,6 +40,7 @@ def products(request, pk=None):
             "products": products,
             "media_url": settings.MEDIA_URL,
         }
+        return render(request, "mainapp/products_list.html", content)
 
     same_products = Product.objects.all()
 
@@ -47,7 +49,8 @@ def products(request, pk=None):
 
     if pk:
         print(f"User select category: {pk}")
-    return render(request, "mainapp/products.html", content)
+    category = {'name': 'все'}
+    return render(request, "mainapp/products_list.html", content)
 
 
 def contact(request):
