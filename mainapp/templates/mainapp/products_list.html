@@ -12,27 +12,24 @@
     <div class="product_list">
         <div class="title clearfix">
             <h2>Категория: "{{ category.name|title }}"</h2>
-            
+
         </div>
         <div class="category-products clearfix">
 
             {% for product in products %}
             <div class="block">
 
-                {% if user.is_authenticated %}
-                <a href="{% url 'products:product' product.pk %}">
-                    {% else %}
-                    <a href="{% url 'auth:login' %}">
-                        {% endif %}
 
-                        <img src="{{ media_url }}{{ product.image }}" alt="{{ product.short_desc }}">
-                        <div class="text">
-                            <img src="{% static 'img/icon-hover.png' %}" alt="hover">
-                            <h4>{{ product.name }}</h4>
-                            <p>{{ product.description }} </p>
-                            <p>{{ product.price }} </p>
-                        </div>
-                    </a>
+                <a href="{% url 'products:product' product.pk %}">
+
+                    <img src="{{ media_url }}{{ product.image }}" alt="{{ product.short_desc }}">
+                    <div class="text">
+                        <img src="{% static 'img/icon-hover.png' %}" alt="hover">
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }} </p>
+                        <p>{{ product.price }} </p>
+                    </div>
+                </a>
             </div>
             {% endfor %}
         </div>

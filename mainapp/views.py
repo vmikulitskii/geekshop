@@ -1,4 +1,5 @@
 import random
+from django.contrib.auth import authenticate
 from django.http import request
 from basketapp.views import basket
 from django.conf import settings
@@ -6,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Contact, Product, ProductCategory
 from basketapp.models import Basket
+from django.contrib.auth.decorators import login_required
 
 
 def main(request):
@@ -43,7 +45,7 @@ def product(request,pk):
         "title":title,
         "links_menu":ProductCategory.objects.all(),
         "product":get_object_or_404(Product,pk=pk),
-        "basket":Basket.objects.filter(user=request.user),
+        "basket":get_basket(request.user),
         "media_url":settings.MEDIA_URL,
 
     }
