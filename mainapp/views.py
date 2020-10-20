@@ -26,7 +26,7 @@ def get_basket(user):
 
 def get_hot_product():
     products = Product.objects.all()
-    return random.sample(list(products),1)[0]
+    return random.choice(list(products))
 
 def get_same_products(hot_product):
     same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
