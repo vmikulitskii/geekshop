@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from authnapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
-from adminapp.forms import ShopUserAdminEditForm
+from adminapp.forms import ProductCategoryEditForm, ShopUserAdminEditForm
 from authnapp.forms import ShopUserRegisterForm
 
 
@@ -93,19 +93,59 @@ def categories(request):
     return render(request, "adminapp/categories.html", content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_create(request):
-    response = redirect("admin:categories")
-    return response
+    title = 'Новая категория'
+
+    if request.method == 'POST':
+        category_form = ProductCategoryEditForm(request.POST,request.FILES)
+        if category_form.is_valid:
+            category_form.save()
+            return HttpResponseRedirect(reverse('admin:categories'))
+    else: 
+        category_form = ProductCategoryEditForm()
+    
+    content = {
+        "title":title,
+        "update_form":category_form,
+        "media_url":settings.MEDIA_URL,
+    }
+
+    return render(request,"adminapp/category_update.html", content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_update(request, pk):
-    response = redirect("admin:categories")
-    return response
+    title = "категории/редактирование"
+
+    edit_category = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == "POST":
+        edit_form = ProductCategoryEditForm(request.POST, request.FILES, instance=edit_category)
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse("admin:category_update", args=[edit_category.pk]))
+    else:
+        edit_form = ProductCategoryEditForm(instance=edit_category)
+
+    content = {"title": title, "update_form": edit_form, "media_url": settings.MEDIA_URL}
+
+    return render(request, "adminapp/category_update.html", content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_delete(request, pk):
-    response = redirect("admin:categories")
-    return response
+    title = "категории/удаление"
+
+    category = get_object_or_404(ProductCategory, pk=pk)
+
+    if request.method == "POST":
+        category.is_active = False
+        category.save()
+        return HttpResponseRedirect(reverse("admin:categories"))
+
+    content = {"title": title, "category_to_delete": category, "media_url": settings.MEDIA_URL}
+
+    return render(request, "adminapp/category_delete.html", content)
 
 
 @user_passes_test(lambda u: u.is_superuser)
