@@ -54,7 +54,7 @@ def user_update(request, pk):
         edit_form = ShopUserAdminEditForm(
             request.POST, request.FILES, instance=edit_user)
         if edit_form.is_valid():
-            print('bang-',edit_form)
+            edit_form.save()
             return HttpResponseRedirect(reverse("admin:user_update", args=[edit_user.pk]))
     else:
         edit_form = ShopUserAdminEditForm(instance=edit_user)
