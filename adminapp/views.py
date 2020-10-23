@@ -31,7 +31,7 @@ def user_create(request):
     title = 'пользователи/создание'
     if request.method == "POST":
         user_form = ShopUserRegisterForm(request.POST, request.FILES)
-        if user_form.is_valid:
+        if user_form.is_valid():
             user_form.save()
             return HttpResponseRedirect(reverse("admin:users"))
     else:
@@ -54,7 +54,7 @@ def user_update(request, pk):
         edit_form = ShopUserAdminEditForm(
             request.POST, request.FILES, instance=edit_user)
         if edit_form.is_valid():
-            edit_form.save()
+            print('bang-',edit_form)
             return HttpResponseRedirect(reverse("admin:user_update", args=[edit_user.pk]))
     else:
         edit_form = ShopUserAdminEditForm(instance=edit_user)
@@ -99,7 +99,7 @@ def category_create(request):
 
     if request.method == 'POST':
         category_form = ProductCategoryEditForm(request.POST,request.FILES)
-        if category_form.is_valid:
+        if category_form.is_valid():
             category_form.save()
             return HttpResponseRedirect(reverse('admin:categories'))
     else: 
