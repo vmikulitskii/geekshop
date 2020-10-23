@@ -1,19 +1,24 @@
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404, redirect, render
 
 from authnapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_main(request):
     response = redirect("admin:users")
     return response
 
 
+@user_passes_test
 def users(request):
     title = "админка/пользователи"
-    users_list = ShopUser.objects.all().order_by("-is_active", "-is_superuser", "-is_staff", "username")
-    content = {"title": title, "objects": users_list, "media_url": settings.MEDIA_URL}
+    users_list = ShopUser.objects.all().order_by(
+        "-is_active", "-is_superuser", "-is_staff", "username")
+    content = {"title": title, "objects": users_list,
+               "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/users.html", content)
 
 
@@ -32,10 +37,12 @@ def user_delete(request, pk):
     return response
 
 
+@user_passes_test
 def categories(request):
     title = "админка/категории"
     categories_list = ProductCategory.objects.all()
-    content = {"title": title, "objects": categories_list, "media_url": settings.MEDIA_URL}
+    content = {"title": title, "objects": categories_list,
+               "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/categories.html", content)
 
 
@@ -54,11 +61,13 @@ def category_delete(request, pk):
     return response
 
 
+@user_passes_test
 def products(request, pk):
     title = "админка/продукт"
     category = get_object_or_404(ProductCategory, pk=pk)
     products_list = Product.objects.filter(category__pk=pk).order_by("name")
-    content = {"title": title, "category": category, "objects": products_list, "media_url": settings.MEDIA_URL}
+    content = {"title": title, "category": category,
+               "objects": products_list, "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/products.html", content)
 
 
