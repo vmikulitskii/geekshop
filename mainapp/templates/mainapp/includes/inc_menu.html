@@ -6,7 +6,7 @@
             class="{% if request.resolver_match.namespace == 'products' %}active{% endif %}">продукты</a></li>
     <li><a href="{% url 'contact' %}"
             class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
-    
+
     {% if user.is_authenticated %}
     <li>
         <a href="{% url 'auth:edit' %}">
@@ -21,25 +21,16 @@
         <a href="{% url 'auth:login' %}">войти</a>
         {% endif %}
     </li>
-    
-    
+
+
 </ul>
 <a href="#" class="search"></a>
 <a href="{% url 'basket:view' %}" class="basket">
+
     <span>
-
         {% if basket %}
-        Товаров - {{ total_quantity }}
+        {{ basket.0.total_cost|floatformat:0 }} руб ({{ basket.0.total_quantity }} шт)
         {% endif %}
-
-    </span>
-    <span>
-
-        {% if basket %}
-        на сумму <br>
-        {{ total_price }} руб.
-        {% endif %}
-
     </span>
 
 </a>

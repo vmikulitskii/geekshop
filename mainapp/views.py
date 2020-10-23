@@ -1,9 +1,13 @@
+import random
+from django.contrib.auth import authenticate
+from django.http import request
 from basketapp.views import basket
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Contact, Product, ProductCategory
 from basketapp.models import Basket
+from django.contrib.auth.decorators import login_required
 
 
 def main(request):
@@ -18,6 +22,35 @@ def main(request):
     return render(request, "mainapp/index.html", content)
 
 
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    return []
+
+
+def get_hot_product():
+    products = Product.objects.all()
+    return random.choice(list(products))
+
+
+def get_same_products(hot_product):
+    same_products = Product.objects.filter(
+        category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    return same_products
+
+
+def product(request,pk):
+    title = 'продукты'
+    content = {
+        "title":title,
+        "links_menu":ProductCategory.objects.all(),
+        "product":get_object_or_404(Product,pk=pk),
+        "basket":get_basket(request.user),
+        "media_url":settings.MEDIA_URL,
+
+    }
+    return render(request,"mainapp/product.html",content)
+
 def products(request, pk=None):
     title = 'товары'
     # with open('mainapp/links_menu.json', 'r') as f:
@@ -26,14 +59,7 @@ def products(request, pk=None):
     # with open('mainapp/same_products.json', 'r') as f:
     #     same_products = json.load(f)
     links_menu = ProductCategory.objects.all()
-    basket = []
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
-        total_quantity = Basket.total_quantity(basket)
-        total_price = Basket.total_price(basket)
-    else:
-        total_quantity = 0
-        total_price = 0
+    basket = get_basket(user=request.user)
 
     if pk is not None:
         if pk == 0:
@@ -50,17 +76,15 @@ def products(request, pk=None):
             "products": products,
             "media_url": settings.MEDIA_URL,
             "basket": basket,
-            "total_quantity":total_quantity,
-            "total_price":total_price,
 
         }
         return render(request, "mainapp/products_list.html", content)
 
-    same_products = Product.objects.all()
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
 
     content = {"title": title, 'links_menu': links_menu,
-               "same_products": same_products, "media_url": settings.MEDIA_URL, "basket": basket, "total_quantity":total_quantity,
-            "total_price":total_price,}
+               "same_products": same_products, "media_url": settings.MEDIA_URL, "basket": basket, "hot_product": hot_product, }
 
     if pk:
         print(f"User select category: {pk}")
