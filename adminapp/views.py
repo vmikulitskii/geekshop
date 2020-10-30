@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from authnapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
@@ -99,10 +100,18 @@ def user_delete(request, pk):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def categories(request):
+def categories(request,page=1):
     title = "админка/категории"
     categories_list = ProductCategory.objects.all()
-    content = {"title": title, "objects": categories_list,
+    paginator = Paginator(categories_list, 3)
+    try:
+        cat_list_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        cat_list_paginator = paginator.page(1)
+    except EmptyPage:
+        cat_list_paginator = paginator.page(paginator.num_pages)
+
+    content = {"title": title, "objects": cat_list_paginator,
                "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/categories.html", content)
 
