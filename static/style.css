@@ -107,9 +107,9 @@ body {
 .products_list button {
     border: 1px solid #eaeaea;
     border-radius: 5px;
-    height: 30px;
+    height: 25px;
     margin: 5px auto;
-    width: 175px;
+    width: 160px;
     padding: 0 15px;
 }
 
@@ -119,8 +119,8 @@ body {
 }
 
 .product_record {
-    height: 125px;
-    margin: 20px auto;
+    height: 200px;
+    margin: 15px auto;
     position: relative;
 }
 
@@ -142,7 +142,7 @@ body {
     float: left;
     margin-top: 0px;
     margin-left: 25px;
-    width: 175px;
+    width: 135px;
 }
 
 .product_record .product_desc {
@@ -156,8 +156,8 @@ body {
 .product_record .summary {
     display: block;
     float: left;
-    margin-top: 15px;
-    margin-left: 25px;
+    margin-top: 0px;
+    margin-left: 35px;
     width: 100px;
 }
 
@@ -206,7 +206,7 @@ body {
 .categories_list button {
     border: 1px solid #eaeaea;
     border-radius: 5px;
-    height: 30px;
+    height: 50px;
     margin: 5px auto;
     padding: 0 15px;
 }
@@ -217,7 +217,7 @@ body {
 }
 
 .category_record {
-    height: 125px;
+    height: 200px;
     margin: 15px auto;
     position: relative;
 }
@@ -240,7 +240,7 @@ body {
     float: left;
     margin-top: 0px;
     margin-left: 25px;
-    width: 185px;
+    width: 175px;
 }
 
 .category_record .category_desc {
@@ -313,7 +313,7 @@ body {
     display: block;
     float: left;
     margin-top: 15px;
-    margin-left: 25px;
+    margin-left: 50px;
     width: 175px;
 }
 
@@ -347,7 +347,7 @@ body {
     float: left;
     margin-top: 15px;
     margin-left: 25px;
-    width: 185px;
+    width: 125px;
 }
 
 .user_record .user_lastlogin {
@@ -435,8 +435,17 @@ body {
     margin: 25px auto;
 }
 
-.basket_container button {
-    margin-left: 25px;
+.basket_list .basket_record button {
+    margin-top: 50px;
+    margin-left: 390px;
+    width: 150px;
+    position: absolute;
+    display: block;
+    float: left;
+}
+
+.basket_list button {
+    margin-left: 45px;
     width: 150px;
     display: block;
     float: left;
