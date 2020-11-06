@@ -33,12 +33,15 @@ def admin_main(request):
 class UsersListView(LoginRequiredMixin, ListView):
     model = ShopUser
     template_name = "adminapp/users.html"
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(UsersListView, self).get_context_data(**kwargs)
         context["title"] = "админка/пользователи"
         context["media_url"] = settings.MEDIA_URL
         return context
+    
+
 
 
 @user_passes_test(lambda u: u.is_superuser)
