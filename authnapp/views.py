@@ -15,6 +15,7 @@ def login(request):
 
     login_form = ShopUserLoginForm(data=request.POST or None)
     next_page = request.GET['next'] if 'next' in request.GET.keys() else ''
+    mail_confirmation = request.GET['mail_confirmation'] if 'mail_confirmation' in request.GET.keys() else ''
 
     if request.method == "POST" and login_form.is_valid():
         username = request.POST["username"]
@@ -27,7 +28,7 @@ def login(request):
                 return HttpResponseRedirect(request.POST["next_page"])
             return HttpResponseRedirect(reverse("main"))
 
-    content = {"title": title, "login_form": login_form, "next_page": next_page,}
+    content = {"title": title, "login_form": login_form, "next_page": next_page,'mail_confirmation':mail_confirmation,}
     return render(request, "authnapp/login.html", content)
 
 
@@ -46,9 +47,9 @@ def register(request):
             user = register_form.save()
             if send_verify_mail(user):
                 print('Сообщение для продтверждения регистрации отправлено')
-                return HttpResponseRedirect(reverse('auth:login'))
+                return HttpResponseRedirect(f'{reverse("auth:login")}?mail_confirmation=yes')
             print("ошибка отправки сообщения для подтверждения регистрации")
-            return HttpResponseRedirect(reverse("auth:login"))
+            return HttpResponseRedirect(f'{reverse("auth:login")}?mail_confirmation=no')
             
     else:
         register_form = ShopUserRegisterForm()
@@ -58,7 +59,7 @@ def register(request):
 
 def send_verify_mail(user):
     verify_link = reverse('auth:verify',args=[user.email,user.activation_key])
-
+    print('!!!!!!',verify_link)
     title = f'Подтверждение учетной записи {user.username}'
     message = f"Для подтверждения учетной записи {user.username} \
     на портале {settings.DOMAIN_NAME} перейдите по ссылке: \

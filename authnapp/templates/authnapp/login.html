@@ -17,5 +17,15 @@
         зарегистрироваться
     </a>
 </button>
+    {% if mail_confirmation == 'yes' %}
+       <div class="h5 text-center head">
+            Сообщение для продтверждения регистрации отправлено. <br>
+            Проверьте ваш почтовый ящик.
+       </div>
+    {% elif mail_confirmation == 'no' %}
+    <div class="h5 text-center head">
+       Ошибка отправки сообщения для подтверждения регистрации!
+   </div>
+    {% endif %}
 
 {% endblock content %}
