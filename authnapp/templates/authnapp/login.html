@@ -17,6 +17,13 @@
         зарегистрироваться
     </a>
 </button>
+
+<button class="btn btn-round form-control">
+    <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+        Вход через <i class="fa fa-vk" aria-hidden="true"></i>
+    </a>
+</button>
+
     {% if mail_confirmation == 'yes' %}
        <div class="h5 text-center head">
             Сообщение для продтверждения регистрации отправлено. <br>

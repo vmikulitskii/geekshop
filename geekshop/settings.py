@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'authnapp',
     'basketapp',
     'adminapp',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -86,23 +88,8 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+
 
 AUTH_USER_MODEL = 'authnapp.ShopUser'
 
@@ -176,3 +163,16 @@ if not DEBUG:
 else:
     # Set simple password for debug
     AUTH_PASSWORD_VALIDATORS = []
+
+AUTHENTICATION_BACKANDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.vk.VKOAuth2",
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = "social"
+# Load settings from file
+with open(".secrets/vk.json", "r") as f:
+    VK = json.load(f)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = VK["SOCIAL_AUTH_VK_OAUTH2_APPID"]
+SOCIAL_AUTH_VK_OAUTH2_SECRET = VK["SOCIAL_AUTH_VK_OAUTH2_KEY"]
