@@ -22,10 +22,11 @@ def main(request):
     return render(request, "mainapp/index.html", content)
 
 
-def get_basket(user):
-    if user.is_authenticated:
-        return Basket.objects.filter(user=user)
-    return []
+# def get_basket(user):
+#     if user.is_authenticated:
+#         return Basket.objects.filter(user=user)
+#     return []
+# Перенесли в отдельный контекстный процессор
 
 
 def get_hot_product():
@@ -45,7 +46,6 @@ def product(request,pk):
         "title":title,
         "links_menu": ProductCategory.objects.filter(is_active=True),
         "product":get_object_or_404(Product,pk=pk),
-        "basket":get_basket(request.user),
         "media_url":settings.MEDIA_URL,
 
     }
@@ -59,10 +59,10 @@ def products(request, pk=None, page=1):
     # with open('mainapp/same_products.json', 'r') as f:
     #     same_products = json.load(f)
     links_menu = ProductCategory.objects.filter(is_active=True)
-    basket = get_basket(user=request.user)
+    
 
     if pk is not None:
-        if pk == 0:
+        if pk == '0':
             category = {"pk": 0, "name": "все"}
             products = Product.objects.filter(is_active=True, category__is_active=True).order_by("price")
         else:
@@ -85,7 +85,6 @@ def products(request, pk=None, page=1):
             "category": category,
             "products": products_paginator,
             "media_url": settings.MEDIA_URL,
-            "basket": basket,
         }
         return render(request, "mainapp/products_list.html", content)
 
@@ -93,7 +92,7 @@ def products(request, pk=None, page=1):
     same_products = get_same_products(hot_product)
 
     content = {"title": title, 'links_menu': links_menu,
-               "same_products": same_products, "media_url": settings.MEDIA_URL, "basket": basket, "hot_product": hot_product, }
+               "same_products": same_products, "media_url": settings.MEDIA_URL, "hot_product": hot_product, }
 
     if pk:
         print(f"User select category: {pk}")

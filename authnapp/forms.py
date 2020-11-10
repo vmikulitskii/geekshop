@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
+import hashlib
+import random
 
 from .models import ShopUser
 
@@ -28,11 +30,20 @@ class ShopUserRegisterForm(UserCreationForm):
             raise forms.ValidationError("У вас еще молого на губах не обсохло!")
         return data
 
-    def clean_bad_santa(self):
+    def clean_first_name(self):
         name = self.cleaned_data['first_name']
         if name == 'Santa':
             raise forms.ValidationError('Санты не существует, малыш')
         return name
+
+    def save(self):
+        user = super(ShopUserRegisterForm,self).save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[6:]
+        user.activation_key = hashlib.sha1((user.email+salt).encode('utf-8')).hexdigest()
+        user.save()
+        return user
+
 
     class Meta:
         model = ShopUser
