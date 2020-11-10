@@ -164,10 +164,11 @@ else:
     # Set simple password for debug
     AUTH_PASSWORD_VALIDATORS = []
 
-AUTHENTICATION_BACKANDS = (
+AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "social_core.backends.vk.VKOAuth2",
 )
+
 
 SOCIAL_AUTH_URL_NAMESPACE = "social"
 # Load settings from file
