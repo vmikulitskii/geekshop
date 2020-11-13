@@ -34,3 +34,7 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.product.name} - {self.quantity}'
+
+    @staticmethod
+    def get_items(user):
+        return Basket.objects.filter(user=user).order_by("product__category")
