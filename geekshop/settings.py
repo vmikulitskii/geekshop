@@ -85,10 +85,17 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
+    # "default": {
+    #     "NAME": "geekshop",
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "USER": "django",
+    #     "PASSWORD": "geekbrains",
+    #     "HOST": "localhost",
+    # }
 }
 
 
@@ -116,16 +123,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+if DEBUG:
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = "authnapp:login"
 
-DOMAIN_NAME = "http://localhost:8080"
+DOMAIN_NAME = "http://localhost:8000"
+# DOMAIN_NAME = "http://localhost:8080"
+# DOMAIN_NAME = "http://ovz1.meekoo.m3xdm.vps.myjino.ru"
 
 # Read about sending email:
 #   https://docs.djangoproject.com/en/2.2/topics/email/
