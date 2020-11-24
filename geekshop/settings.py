@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c771z0!u@$@f4=#uta6-ilb3%knsh&7$=)90^$vh6c2n#jg%!o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -85,17 +85,17 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    # }
     "default": {
-        "NAME": "geekshop",
-        "ENGINE": "django.db.backends.postgresql",
-        "USER": "django",
-        "PASSWORD": "geekbrains",
-        "HOST": "localhost",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
+    # "default": {
+    #     "NAME": "geekshop",
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "USER": "django",
+    #     "PASSWORD": "geekbrains",
+    #     "HOST": "localhost",
+    # }
 }
 
 
