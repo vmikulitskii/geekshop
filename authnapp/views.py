@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db import transaction
+
 
 from authnapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserProfileEditForm, ShopUserRegisterForm, ShopUserEditForm
 from authnapp.models import ShopUser
@@ -89,7 +91,7 @@ def verify(request,email,activation_key):
 
         
 
-
+@login_required
 @transaction.atomic
 def edit(request):
     title = "редактирование"
