@@ -13,6 +13,9 @@ defusedxml==0.7.0rc1
 distlib==0.3.0
 distro==1.4.0
 Django==2.2.16
+django-debug-toolbar==3.1.1
+django-debug-toolbar-template-profiler==2.0.1
+django-extensions==3.0.9
 html5lib==1.0.1
 idna==2.8
 ipaddr==2.2.0
@@ -27,6 +30,8 @@ Pillow==8.0.1
 progress==1.5
 pycodestyle==2.6.0
 pycparser==2.20
+pydotplus==2.0.2
+pygraphviz==1.6
 PyJWT==1.7.1
 pyparsing==2.4.6
 python3-openid==3.2.0
@@ -45,3 +50,4 @@ typed-ast==1.4.1
 typing-extensions==3.7.4.3
 urllib3==1.25.8
 webencodings==0.5.1
+wrapt==1.12.1
