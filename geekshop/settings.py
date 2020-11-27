@@ -58,8 +58,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "social_django.middleware.SocialAuthExceptionMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+if DEBUG:
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = 'geekshop.urls'
 
