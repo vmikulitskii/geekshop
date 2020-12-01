@@ -8,6 +8,7 @@ from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.detail import DetailView
+from django.db.models import F
 
 from basketapp.models import Basket
 from mainapp.models import Product
@@ -131,9 +132,9 @@ def order_forming_complete(request, pk):
 @receiver(pre_save, sender=Basket)
 def product_quantity_update_save(instance, sender, **kwargs):
     if instance.pk:
-        instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        instance.product.quantity = F("quantity") - (instance.quantity - sender.get_item(instance.pk).quantity)
     else:
-        instance.product.quantity -= instance.quantity
+        instance.product.quantity = F("quantity") - instance.quantity
     instance.product.save()
     # quantity_total = instance.product.reserved + instance.product.quantity
     # quantity_delta = quantity_total - instance.quantity
@@ -149,8 +150,7 @@ def product_quantity_update_save(instance, sender, **kwargs):
 @receiver(pre_delete, sender=OrderItem)
 @receiver(pre_delete, sender=Basket)
 def product_quantity_update_delete(instance, **kwargs):
-    instance.product.quantity += instance.product.reserved
-    instance.product.reserved = 0
+    instance.product.quantity = F("quantity") + instance.quantity
     instance.product.save()
 
 
