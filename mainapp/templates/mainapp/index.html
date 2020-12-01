@@ -50,4 +50,19 @@
 </div>
 
 <div class="clr"></div>
+<div style="display: none;">
+    <ul>
+		{% comment %}
+        <li>{{ fact.get_factorial }}</li>
+        <li>{{ fact.get_factorial }}</li>
+        <li>{{ fact.get_factorial }}</li>
+
+		{% endcomment %}
+        {% with temp_fact=fact.get_factorial %}
+        <li>{{ temp_fact }}</li>
+        <li>{{ temp_fact }}</li>
+        <li>{{ temp_fact }}</li>
+        {% endwith %}
+    </ul>
+</div>
 {% endblock %}
