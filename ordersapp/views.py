@@ -1,18 +1,20 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 from django.forms import inlineformset_factory
+from django.http import JsonResponse
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.detail import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 
 from basketapp.models import Basket
+from mainapp.models import Product
 from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItem
-from mainapp.models import Product
-from django.http import JsonResponse
+
 
 class OrderList(LoginRequiredMixin, ListView):
     model = Order
@@ -33,7 +35,7 @@ class OrderItemsCreate(CreateView):
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
-            basket_items = Basket.get_items(self.request.user)
+            basket_items = self.request.user.basket.select_related().order_by("product__category")
             if len(basket_items):
                 OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_items))
                 formset = OrderFormSet()
@@ -112,6 +114,7 @@ class OrderItemsUpdate(UpdateView):
 
         return super(OrderItemsUpdate, self).form_valid(form)
 
+
 class OrderDelete(DeleteView):
     model = Order
     success_url = reverse_lazy("ordersapp:orders_list")
@@ -128,27 +131,26 @@ def order_forming_complete(request, pk):
 @receiver(pre_save, sender=OrderItem)
 @receiver(pre_save, sender=Basket)
 def product_quantity_update_save(instance, sender, **kwargs):
-    # if instance.pk:
-    #     instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
-    # else:
-    #     instance.product.quantity -= instance.quantity
-    # instance.product.save()
-    quantity_total = instance.product.reserved + instance.product.quantity
-    quantity_delta = quantity_total - instance.quantity
-    if quantity_delta < 0:
-        instance.product.reserved = quantity_total
-        instance.quantity = instance.product.reserved
+    if instance.pk:
+        instance.product.quantity = F("quantity") - (instance.quantity - sender.get_item(instance.pk).quantity)
     else:
-        instance.product.reserved = instance.quantity
-        instance.product.quantity = quantity_delta
+        instance.product.quantity = F("quantity") - instance.quantity
     instance.product.save()
+    # quantity_total = instance.product.reserved + instance.product.quantity
+    # quantity_delta = quantity_total - instance.quantity
+    # if quantity_delta < 0:
+    #     instance.product.reserved = quantity_total
+    #     instance.quantity = instance.product.reserved
+    # else:
+    #     instance.product.reserved = instance.quantity
+    #     instance.product.quantity = quantity_delta
+    # instance.product.save()
 
 
 @receiver(pre_delete, sender=OrderItem)
 @receiver(pre_delete, sender=Basket)
 def product_quantity_update_delete(instance, **kwargs):
-    instance.product.quantity += instance.product.reserved
-    instance.product.reserved = 0
+    instance.product.quantity = F("quantity") + instance.quantity
     instance.product.save()
 
 
@@ -159,4 +161,3 @@ def get_product_price(request, pk):
             return JsonResponse({"price": product.price})
         else:
             return JsonResponse({"price": 0})
-

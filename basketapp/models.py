@@ -32,13 +32,13 @@ class Basket(models.Model):
         return _totalcost
 
    
-    # @staticmethod
-    # def get_items(user):
-    #     return Basket.objects.filter(user=user).order_by("product__category")
+    @staticmethod
+    def get_items(user):
+        return Basket.objects.filter(user=user).order_by("product__category")
 
-    @cached_property
-    def get_items_cached(self):
-        return self.user.basket.select_related()
+    # @cached_property
+    # def get_items_cached(self):
+    #     return self.user.basket.select_related()
 
     @staticmethod
     def get_item(pk):

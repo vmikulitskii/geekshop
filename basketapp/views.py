@@ -6,6 +6,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.db import connection
+from django.db.models import F
 
 # Create your views here.
 
@@ -30,9 +32,14 @@ def basket_add(request, pk):
 
     if not basket:
         basket = Basket(user=request.user, product=product)
-
-    basket.quantity += 1
+        basket.quantity += 1
+    else:
+        basket.quantity = F("quantity") + 1
+    
     basket.save()
+
+    update_queries = list(filter(lambda x: 'UPDATE' in x['sql'], connection.queries))
+    print(f'query basket_add: {update_queries}')
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
